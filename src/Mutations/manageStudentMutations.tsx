@@ -1,4 +1,6 @@
-import { gql } from '@apollo/client';
+// import { gql } from '@apollo/client';
+import { gql, ApolloClient, InMemoryCache } from '@apollo/client';
+
 import GET_PROFILE from './User';
 
 export const GET_USERS_QUERY = gql`
@@ -96,16 +98,34 @@ export const GET_TRAINEE_PROFILE = gql`
 `;
 
 export const GET_GITHUB_STATISTICS = gql`
-query GitHubActivity($organisation: String!, $username: String!) {
-  gitHubActivity(organisation: $organisation, username: $username) {
-    totalCommits
-    pullRequest {
-      closed
-      merged
-      opened
+  query GitHubActivity($organisation: String!, $username: String!) {
+    gitHubActivity(organisation: $organisation, username: $username) {
+      totalCommits
+      pullRequest {
+        closed
+        merged
+        opened
+      }
     }
   }
-}
+`;
+export const GET_LOGIN_ACTIVITIES = gql`
+  query Query {
+    getProfile {
+      activity {
+        date
+        country_code
+        country_name
+        city
+        IPv4
+        state
+        latitude
+        longitude
+        postal
+        failed
+      }
+    }
+  }
 `;
 
 export const ADD_MEMBER_TO_COHORT_MUTATION = gql`
